@@ -40,7 +40,17 @@ export default {
 
   },
   methods: {
-    mLeft() {},
+    mLeft() {
+      this.arrImg[this.in].status = false;
+      this.in--
+      if(this.in >= 0){
+        this.arrImg[this.in].status = true;
+      }
+      else{
+        this.in = this.arrImg.length-1;
+        this.arrImg[this.in].status = true;
+      }
+    },
     mRight() {
       this.arrImg[this.in].status = false;
       this.in++
