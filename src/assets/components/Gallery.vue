@@ -16,7 +16,6 @@
 </template>
 
 <script>
-// import myimg from './Img'
 export default {
   data() {
     return {
@@ -88,9 +87,12 @@ img {
   .gallery-img {
     position: absolute;
     display: none;
+    opacity: 0;
   }
   .active {
     display: block;
+    opacity: 1;
+    animation: anim-opacity 1s ease-out forwards;
   }
   .btn-container {
     position: absolute;
@@ -109,5 +111,10 @@ img {
       }
     }
   }
+}
+
+@keyframes anim-opacity {
+  0%{opacity: 0;}
+  100%{opacity: 1;}
 }
 </style>
