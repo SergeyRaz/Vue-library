@@ -22,7 +22,7 @@ export default {
     return {
       in: 0,
       isActive: true,
-      arrImgWay: ['src/assets/img/1.jpg','src/assets/img/2.jpg','src/assets/img/7.jpg','src/assets/img/8.jpg'],
+      arrImgWay: ['src/assets/img/1.jpg','src/assets/img/2.jpg','src/assets/img/7.jpg','src/assets/img/8.jpg','src/assets/img/9.jpg'],
       arrImg: []
     };
   },
