@@ -21,17 +21,18 @@ export default {
     return {
       in: 0,
       isActive: true,
-      arrImgWay: ['src/assets/img/1.jpg','src/assets/img/2.jpg','src/assets/img/7.jpg','src/assets/img/8.jpg','src/assets/img/9.jpg','src/assets/img/3.jpg'],
+      way: 'src/assets/img/',   // Путь до папки с изображениями
+      arrImgWay: ['1.jpg','2.jpg','7.jpg','8.jpg','9.jpg','3.jpg'],
       arrImg: []
     };
   },
   beforeMount(){
     for(let i = 0; i < this.arrImgWay.length; i++){
       if(i == 0){
-        this.arrImg.push({img: this.arrImgWay[i], status: true});
+        this.arrImg.push({img: (this.way + this.arrImgWay[i]), status: true});
       }
       else{
-        this.arrImg.push({img: this.arrImgWay[i], status: false});
+        this.arrImg.push({img: (this.way + this.arrImgWay[i]), status: false});
       }
     }
   },
