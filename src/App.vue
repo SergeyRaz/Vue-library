@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import gallery from './assets/components/Gallery'
+import gallery from './assets/components/gallery/Gallery.vue'
 export default {
   data () {
     return {
