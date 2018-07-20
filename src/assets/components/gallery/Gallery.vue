@@ -8,6 +8,7 @@
       :src="value.img" 
       :alt="key">
 		</div>
+    <carousel></carousel>
 		<div class="btn-container">
 			<input type="button" @click="mLeft()" value="< Назад" class="btn btn-left">
 			<input type="button" @click="mRight()" value="Вперед >" class="btn btn-right">
@@ -16,7 +17,11 @@
 </template>
 
 <script>
+import carousel from './Carousel.vue'
 export default {
+  components: {
+    carousel
+  },
   data() {
     return {
       in: 0,
@@ -35,9 +40,6 @@ export default {
         this.arrImg.push({img: (this.way + this.arrImgWay[i]), status: false});
       }
     }
-  },
-  computed: {
-
   },
   methods: {
     mLeft() {
@@ -80,10 +82,11 @@ img {
   width: 600px;
   margin: 10px auto;
   position: relative;
-  border: 3px solid darkcyan;
-  border-radius: 3px;
   .gallery-container {
+    position: relative;
     height: 338px;
+    border-bottom: 3px solid #fff;
+    border-radius: 3px;
   }
   .gallery-img {
     position: absolute;
