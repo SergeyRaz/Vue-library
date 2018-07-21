@@ -1,21 +1,27 @@
 <template>
 	<div class="carousel">
-		<img class="carousel-img" src="src/assets/img/1.jpg">
-		<img class="carousel-img" src="src/assets/img/2.jpg">
-		<img class="carousel-img" src="src/assets/img/3.jpg">
-		<img class="carousel-img" src="src/assets/img/4.jpg">
+		<img class="carousel-img"
+      v-for="(value, index, key) in arrImg"
+      :class="{active : value.status}"
+      :key="key"
+      :src="value.img" 
+      :alt="key"
+			@click="onView(index)">
 	</div>
 </template>
 
 <script>
 export default {
+	props: ['arrImg'],
   data() {
     return {
-
+			a: 1
     };
 	},
 	methods: {
-
+		onView(index){
+			this.$emit('onView', index);
+		}
 	}
 };
 </script>

@@ -8,7 +8,9 @@
       :src="value.img" 
       :alt="key">
 		</div>
-    <carousel></carousel>
+    <carousel 
+      :arrImg=arrImg
+      @onView="onView"></carousel>
 		<div class="btn-container">
 			<input type="button" @click="mLeft()" value="< Назад" class="btn btn-left">
 			<input type="button" @click="mRight()" value="Вперед >" class="btn btn-right">
@@ -63,6 +65,13 @@ export default {
         this.in = 0;
         this.arrImg[this.in].status = true;
       }
+    },
+    onView(index){
+      for(let i = 0; i < this.arrImg.length; i++){
+        this.arrImg[i].status = false;
+      }
+      this.in = index;
+      this.arrImg[index].status = true;
     }
   }
 };
