@@ -9,7 +9,7 @@
       :alt="key">
 		</div>
     <carousel 
-      :arrImg=arrImg
+      :arrImg="arrImg"
       @onView="onView"></carousel>
 		<div class="btn-container">
 			<input type="button" @click="mLeft()" value="< Назад" class="btn btn-left">
@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      in: 0,
+      ind: 0,
       isActive: true,
       way: 'src/assets/img/',   // Путь до папки с изображениями
       arrImgWay: ['1.jpg','2.jpg','7.jpg','8.jpg','9.jpg','3.jpg'],
@@ -45,32 +45,32 @@ export default {
   },
   methods: {
     mLeft() {
-      this.arrImg[this.in].status = false;
-      this.in--
-      if(this.in >= 0){
-        this.arrImg[this.in].status = true;
+      this.arrImg[this.ind].status = false;
+      this.ind--
+      if(this.ind >= 0){
+        this.arrImg[this.ind].status = true;
       }
       else{
-        this.in = this.arrImg.length-1;
-        this.arrImg[this.in].status = true;
+        this.ind = this.arrImg.length-1;
+        this.arrImg[this.ind].status = true;
       }
     },
     mRight() {
-      this.arrImg[this.in].status = false;
-      this.in++
-      if(this.in < this.arrImg.length){
-        this.arrImg[this.in].status = true;
+      this.arrImg[this.ind].status = false;
+      this.ind++
+      if(this.ind < this.arrImg.length){
+        this.arrImg[this.ind].status = true;
       }
       else{
-        this.in = 0;
-        this.arrImg[this.in].status = true;
+        this.ind = 0;
+        this.arrImg[this.ind].status = true;
       }
     },
     onView(index){
       for(let i = 0; i < this.arrImg.length; i++){
         this.arrImg[i].status = false;
       }
-      this.in = index;
+      this.ind = index;
       this.arrImg[index].status = true;
     }
   }
