@@ -21,8 +21,8 @@
       </div>
 	  </div>
 		<div class="btn-container">
-			<input type="button" @click="mLeft()" value="< Назад" class="btn btn-left">
-			<input type="button" @click="mRight()" value="Вперед >" class="btn btn-right">
+			<input type="button" @click="mLeft" value="< Назад" class="btn btn-left">
+			<input type="button" @click="mRight" value="Вперед >" class="btn btn-right">
 		</div>
 	</div>
 </template>
@@ -35,7 +35,7 @@ export default {
       ind: 0,
       isActive: true,
       way: "src/assets/img/", // Путь до папки с изображениями
-      arrImgWay: ["1.jpg", "2.jpg", "7.jpg", "8.jpg", "9.jpg", "3.jpg"],
+      arrImgWay: ["1.jpg", "2.jpg", "5.jpg", "4.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "3.jpg", "2.jpg", "5.jpg", "4.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "3.jpg"],
       arrImg: []
     };
   },
@@ -58,6 +58,17 @@ export default {
         this.ind = this.arrImg.length - 1;
         this.arrImg[this.ind].status = true;
       }
+      if(this.ind < (this.arrImg.length)){
+        if(this.ind == this.arrImg.length - 1){
+          this.shift = 'left: -' + (153*(this.ind-3)) + 'px;'
+        }
+        else if(this.ind == this.arrImg.length - 2){
+          this.shift = 'left: -' + (153*(this.ind-2)) + 'px;'
+        }
+        else{
+          this.shift = 'left: -' + (153*(this.ind-1)) + 'px;'
+        }
+      }
     },
     mRight() {
       this.arrImg[this.ind].status = false;
@@ -68,10 +79,16 @@ export default {
         this.ind = 0;
         this.arrImg[this.ind].status = true;
       }
+      if(this.ind < (this.arrImg.length-3)){
+        this.shift = 'left: ' + (153*(-this.ind)) + 'px;'
+      }
     },
     onView(index) {
       if(index < (this.arrImg.length - 2)){
         this.shift = 'left: -' + (153*(index-1)) + 'px;'
+      }
+      else if(index < (this.arrImg.length - 1)){
+        this.shift = 'left: -' + (153*(index-2)) + 'px;'
       }
       for (let i = 0; i < this.arrImg.length; i++) {
         this.arrImg[i].status = false;
