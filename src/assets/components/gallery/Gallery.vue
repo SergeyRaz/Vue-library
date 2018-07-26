@@ -7,6 +7,8 @@
       :key="key"
       :src="value.img" 
       :alt="key">
+      <div @click="mLeft" class="btn btn-left"><i class="fas fa-hand-point-left"></i></div>
+			<div @click="mRight" class="btn btn-right"><i class="fas fa-hand-point-right"></i></div>
 		</div>
     <div class="carousel">
       <div class="carousel-block"
@@ -20,10 +22,6 @@
         @click="onView(index)">
       </div>
 	  </div>
-		<div class="btn-container">
-			<input type="button" @click="mLeft" value="< Назад" class="btn btn-left">
-			<input type="button" @click="mRight" value="Вперед >" class="btn btn-right">
-		</div>
 	</div>
 </template>
 
@@ -119,6 +117,11 @@ img {
     height: 338px;
     border-bottom: 3px solid #fff;
     border-radius: 3px;
+    &:hover .btn{
+      display: block;
+      opacity: 1;
+      animation: anim-opacity .3s ease-out forwards;
+    }
   }
   .gallery-img {
     position: absolute;
@@ -130,22 +133,28 @@ img {
     opacity: 1;
     animation: anim-opacity 1s ease-out forwards;
   }
-  .btn-container {
+  .btn {
+    opacity: 0;
     position: absolute;
-    bottom: -35px;
-    left: calc(50% - 76px);
-    .btn {
-      background-color: darkcyan;
-      color: #fff;
-      padding: 5px 10px;
-      border: 1px solid #fff;
-      border-radius: 3px;
-      font-family: "Roboto Condensed", sans-serif;
-      cursor: pointer;
+    top: calc(50% - 30px);
+    color: #fff;
+    cursor: pointer;
+    svg{
+      width: 60px;
+      height: 60px;
+      stroke: #444;
+      stroke-width: 10px;
+      transition: .3s;
       &:hover {
-        background-color: #008181;
+        transform: scale(1.2);
       }
     }
+  }
+  .btn-left{
+    left: 10px;
+  }
+  .btn-right{
+    right: 10px;
   }
 }
 .carousel {
