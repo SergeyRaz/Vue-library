@@ -29,11 +29,12 @@
 export default {
   data() {
     return {
-      shift: '',
+      shift: "",
+      shiftNumber: 120,
       ind: 0,
       isActive: true,
       way: "src/assets/img/", // Путь до папки с изображениями
-      arrImgWay: ["1.jpg", "2.jpg", "5.jpg", "4.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "3.jpg", "2.jpg", "5.jpg", "4.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "3.jpg"],
+      arrImgWay: ["1.jpg", "2.jpg", "5.jpg", "4.jpg", "6.jpg", "7.jpg"],
       arrImg: []
     };
   },
@@ -56,17 +57,6 @@ export default {
         this.ind = this.arrImg.length - 1;
         this.arrImg[this.ind].status = true;
       }
-      if(this.ind < (this.arrImg.length)){
-        if(this.ind == this.arrImg.length - 1){
-          this.shift = 'left: -' + (153*(this.ind-3)) + 'px;'
-        }
-        else if(this.ind == this.arrImg.length - 2){
-          this.shift = 'left: -' + (153*(this.ind-2)) + 'px;'
-        }
-        else{
-          this.shift = 'left: -' + (153*(this.ind-1)) + 'px;'
-        }
-      }
     },
     mRight() {
       this.arrImg[this.ind].status = false;
@@ -77,23 +67,10 @@ export default {
         this.ind = 0;
         this.arrImg[this.ind].status = true;
       }
-      if(this.ind < (this.arrImg.length-3)){
-        this.shift = 'left: ' + (153*(-this.ind)) + 'px;'
-      }
     },
     onView(index) {
-      if(index < (this.arrImg.length - 2)){
-        this.shift = 'left: -' + (153*(index-1)) + 'px;'
-      }
-      else if(index < (this.arrImg.length - 1)){
-        this.shift = 'left: -' + (153*(index-2)) + 'px;'
-      }
-      for (let i = 0; i < this.arrImg.length; i++) {
-        this.arrImg[i].status = false;
-      }
       this.ind = index;
-      this.arrImg[index].status = true;
-    },
+    }
   }
 };
 </script>
@@ -106,6 +83,7 @@ img {
   display: block;
   width: 100%;
   height: 100%;
+  -webkit-user-select: none;
 }
 .gallery {
   font-family: "Roboto Condensed", sans-serif;
@@ -117,10 +95,10 @@ img {
     height: 338px;
     border-bottom: 3px solid #fff;
     border-radius: 3px;
-    &:hover .btn{
+    &:hover .btn {
       display: block;
       opacity: 1;
-      animation: anim-opacity .3s ease-out forwards;
+      animation: anim-opacity 0.3s ease-out forwards;
     }
   }
   .gallery-img {
@@ -139,39 +117,39 @@ img {
     top: calc(50% - 30px);
     color: #fff;
     cursor: pointer;
-    svg{
+    svg {
       width: 60px;
       height: 60px;
       stroke: #444;
       stroke-width: 10px;
-      transition: .3s;
+      transition: 0.3s;
       &:hover {
         transform: scale(1.2);
       }
     }
   }
-  .btn-left{
+  .btn-left {
     left: 10px;
   }
-  .btn-right{
+  .btn-right {
     right: 10px;
   }
 }
 .carousel {
-  height: 85px;
+  height: 70px;
   position: relative;
   overflow: hidden;
   .carousel-block {
     position: absolute;
     display: flex;
-    height: 85px;
+    height: 70px;
     transition: 1s;
     left: 0;
     .carousel-img {
       box-sizing: border-box;
-      width: 151px;
-      height: 85px;
-      border-right: 3px solid #fff;
+      width: 120px;
+      height: 70px;
+      // border-right: 3px solid #fff;
       cursor: pointer;
       &:last-child {
         border: none;
