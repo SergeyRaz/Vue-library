@@ -49,6 +49,9 @@ export default {
   },
   methods: {
     mLeft() {
+      this.prevHendlerIndex()
+    },
+    prevHendlerIndex() {
       this.arrImg[this.ind].status = false;
       this.ind--;
       if (this.ind >= 0) {
@@ -58,7 +61,11 @@ export default {
         this.arrImg[this.ind].status = true;
       }
     },
+
     mRight() {
+      this.nextHendlerIndex();
+    },
+    nextHendlerIndex() {
       this.arrImg[this.ind].status = false;
       this.ind++;
       if (this.ind < this.arrImg.length) {
