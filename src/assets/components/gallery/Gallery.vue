@@ -35,7 +35,18 @@ export default {
       ind: 0,
       isActive: true,
       way: "src/assets/img/", // Путь до папки с изображениями
-      arrImgWay: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg",],
+      arrImgWay: [
+        "1.jpg",
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg"
+      ],
       arrImg: []
     };
   },
@@ -62,12 +73,11 @@ export default {
       if (this.ind < this.arrImg.length - 3) {
         this.shift = `left: -${this.shiftNumber * this.ind + -240}px;`;
       } else {
-        this.shift = `left: -${this.shiftNumber * (this.arrImg.length-5)}px;`;
+        this.shift = `left: -${this.shiftNumber * (this.arrImg.length - 5)}px;`;
       }
-      console.log(this.arrImg.length);
-      console.log(this.ind);
     },
     nextHendler() {
+
       this.arrImg[this.ind].status = false;
       this.ind++;
       if (this.ind < this.arrImg.length) {
@@ -88,8 +98,25 @@ export default {
       for (let i = 0; i < this.arrImg.length; i++) {
         this.arrImg[i].status = false;
       }
-
       this.arrImg[this.ind].status = true;
+
+      if (this.ind > 2 && this.ind < this.arrImg.length - 2) {
+        this.shift = `left: -${this.shiftNumber * this.ind + -240}px;`;
+      } 
+      
+      else if (this.ind > 2 && this.ind < this.arrImg.length - 1) {
+        this.shift = `left: -${this.shiftNumber * this.ind + -360}px;`;
+      } 
+      
+      else if (this.ind == 2) {
+        this.shift = `left: -${this.shiftNumber * 0}px;`;
+      }
+
+      else if (this.ind == 1) {
+        this.shift = `left: -${this.shiftNumber = 0}px;`;
+        this.shiftNumber = 120;
+      }
+
     }
   }
 };
