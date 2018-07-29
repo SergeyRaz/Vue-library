@@ -7,9 +7,10 @@
       :key="key"
       :src="value.img" 
       :alt="key">
-      <div @click="mLeft" class="btn btn-left"><i class="fas fa-hand-point-left"></i></div>
-			<div @click="mRight" class="btn btn-right"><i class="fas fa-hand-point-right"></i></div>
+      <div @click="prevHendler" class="btn btn-left"><i class="fas fa-hand-point-left"></i></div>
+			<div @click="nextHendler" class="btn btn-right"><i class="fas fa-hand-point-right"></i></div>
 		</div>
+
     <div class="carousel">
       <div class="carousel-block"
       :style="shift">
@@ -34,7 +35,7 @@ export default {
       ind: 0,
       isActive: true,
       way: "src/assets/img/", // Путь до папки с изображениями
-      arrImgWay: ["1.jpg", "2.jpg", "5.jpg", "4.jpg", "6.jpg", "7.jpg"],
+      arrImgWay: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg",],
       arrImg: []
     };
   },
@@ -48,10 +49,7 @@ export default {
     }
   },
   methods: {
-    mLeft() {
-      this.prevHendlerIndex()
-    },
-    prevHendlerIndex() {
+    prevHendler() {
       this.arrImg[this.ind].status = false;
       this.ind--;
       if (this.ind >= 0) {
@@ -60,12 +58,16 @@ export default {
         this.ind = this.arrImg.length - 1;
         this.arrImg[this.ind].status = true;
       }
-    },
 
-    mRight() {
-      this.nextHendlerIndex();
+      if (this.ind < this.arrImg.length - 3) {
+        this.shift = `left: -${this.shiftNumber * this.ind + -240}px;`;
+      } else {
+        this.shift = `left: -${this.shiftNumber * (this.arrImg.length-5)}px;`;
+      }
+      console.log(this.arrImg.length);
+      console.log(this.ind);
     },
-    nextHendlerIndex() {
+    nextHendler() {
       this.arrImg[this.ind].status = false;
       this.ind++;
       if (this.ind < this.arrImg.length) {
@@ -74,9 +76,20 @@ export default {
         this.ind = 0;
         this.arrImg[this.ind].status = true;
       }
+
+      if (this.ind > 2 && this.ind < this.arrImg.length - 2) {
+        this.shift = `left: -${this.shiftNumber * this.ind + -240}px;`;
+      } else if (this.ind == 0) {
+        this.shift = `left: -${this.shiftNumber * this.ind}px;`;
+      }
     },
     onView(index) {
       this.ind = index;
+      for (let i = 0; i < this.arrImg.length; i++) {
+        this.arrImg[i].status = false;
+      }
+
+      this.arrImg[this.ind].status = true;
     }
   }
 };
@@ -152,15 +165,18 @@ img {
     height: 70px;
     transition: 1s;
     left: 0;
+    .active {
+      border: 3px solid darkorange;
+    }
     .carousel-img {
       box-sizing: border-box;
       width: 120px;
       height: 70px;
       // border-right: 3px solid #fff;
       cursor: pointer;
-      &:last-child {
-        border: none;
-      }
+      // &:last-child {
+      //   border: none;
+      // }
     }
   }
 }
