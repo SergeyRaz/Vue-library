@@ -1,26 +1,26 @@
 <template>
-	<div class="gallery">
-		<div class="gallery-container">
-			<img class="gallery-img"
-      v-for="(value, index, key) in arrImg"
-      :class="{active : value.status}"
-      :key="key"
-      :src="value.img" 
-      :alt="key">
-      <div @click="prevHendler" class="btn btn-left"><i class="fas fa-hand-point-left"></i></div>
-			<div @click="nextHendler" class="btn btn-right"><i class="fas fa-hand-point-right"></i></div>
+	<div class='gallery'>
+		<div class='gallery-container'>
+			<img class='gallery-img'
+      v-for='(value, index, key) in arrayPathsImages'
+      :class='{active : value.status}'
+      :key='key'
+      :src='value.img' 
+      :alt='key'>
+      <div @click='prevHendler' class='btn btn-left'><i class='fas fa-hand-point-left'></i></div>
+			<div @click='nextHendler' class='btn btn-right'><i class='fas fa-hand-point-right'></i></div>
 		</div>
 
-    <div class="carousel">
-      <div class="carousel-block"
-      :style="shift">
-        <img class="carousel-img"
-        v-for="(value, index, key) in arrImg"
-        :class="{active : value.status}"
-        :key="key"
-        :src="value.img" 
-        :alt="key"
-        @click="onView(index)">
+    <div class='carousel'>
+      <div class='carousel-block'
+      :style='offsetLeft'>
+        <img class='carousel-img'
+        v-for='(value, index, key) in arrayPathsImages'
+        :class='{active : value.status}'
+        :key='key'
+        :src='value.img' 
+        :alt='key'
+        @click='onView(index)'>
       </div>
 	  </div>
 	</div>
@@ -30,12 +30,12 @@
 export default {
   data() {
     return {
-      shift: "",
-      shiftNumber: 120,
-      ind: 0,
-      isActive: true,
-      way: "src/assets/img/", // Путь до папки с изображениями
-      arrImgWay: [
+      offsetLeft: "", // Смещение картинки
+      widthImages: 120, // Ширина картинки в карусели
+      index: 0, // Индекс картинки
+      isActive: true, // Флаг для класса active в теге img
+      path: "src/assets/img/", // Путь до папки с изображениями
+      arrayNamesImages: [
         "1.jpg",
         "2.jpg",
         "3.jpg",
@@ -46,83 +46,85 @@ export default {
         "8.jpg",
         "9.jpg",
         "10.jpg"
-      ],
-      arrImg: []
+      ], // Массив имен картинок
+      arrayPathsImages: [] // Массив путей до картинок
     };
   },
   beforeMount() {
-    for (let i = 0; i < this.arrImgWay.length; i++) {
+    for (let i = 0; i < this.arrayNamesImages.length; i++) {
       if (i == 0) {
-        this.arrImg.push({ img: this.way + this.arrImgWay[i], status: true });
+        this.arrayPathsImages.push({
+          img: this.path + this.arrayNamesImages[i],
+          status: true
+        });
       } else {
-        this.arrImg.push({ img: this.way + this.arrImgWay[i], status: false });
+        this.arrayPathsImages.push({
+          img: this.path + this.arrayNamesImages[i],
+          status: false
+        });
       }
     }
   },
   methods: {
     prevHendler() {
-      this.arrImg[this.ind].status = false;
-      this.ind--;
-      if (this.ind >= 0) {
-        this.arrImg[this.ind].status = true;
+      this.arrayPathsImages[this.index].status = false;
+      this.index--;
+      if (this.index >= 0) {
+        this.arrayPathsImages[this.index].status = true;
       } else {
-        this.ind = this.arrImg.length - 1;
-        this.arrImg[this.ind].status = true;
+        this.index = this.arrayPathsImages.length - 1;
+        this.arrayPathsImages[this.index].status = true;
       }
 
-      if (this.ind < this.arrImg.length - 3) {
-        this.shift = `left: -${this.shiftNumber * this.ind + -240}px;`;
+      if (this.index < this.arrayPathsImages.length - 3) {
+        this.offsetLeft = `left: -${this.widthImages * this.index + -240}px;`;
       } else {
-        this.shift = `left: -${this.shiftNumber * (this.arrImg.length - 5)}px;`;
+        this.offsetLeft = `left: -${this.widthImages *
+          (this.arrayPathsImages.length - 5)}px;`;
       }
     },
     nextHendler() {
-
-      this.arrImg[this.ind].status = false;
-      this.ind++;
-      if (this.ind < this.arrImg.length) {
-        this.arrImg[this.ind].status = true;
+      this.arrayPathsImages[this.index].status = false;
+      this.index++;
+      if (this.index < this.arrayPathsImages.length) {
+        this.arrayPathsImages[this.index].status = true;
       } else {
-        this.ind = 0;
-        this.arrImg[this.ind].status = true;
+        this.index = 0;
+        this.arrayPathsImages[this.index].status = true;
       }
 
-      if (this.ind > 2 && this.ind < this.arrImg.length - 2) {
-        this.shift = `left: -${this.shiftNumber * this.ind + -240}px;`;
-      } else if (this.ind == 0) {
-        this.shift = `left: -${this.shiftNumber * this.ind}px;`;
+      if (this.index > 2 && this.index < this.arrayPathsImages.length - 2) {
+        this.offsetLeft = `left: -${this.widthImages * this.index + -240}px;`;
+      } else if (this.index == 0) {
+        this.offsetLeft = `left: -${this.widthImages * this.index}px;`;
       }
     },
     onView(index) {
-      this.ind = index;
-      for (let i = 0; i < this.arrImg.length; i++) {
-        this.arrImg[i].status = false;
+      this.index = index;
+      for (let i = 0; i < this.arrayPathsImages.length; i++) {
+        this.arrayPathsImages[i].status = false;
       }
-      this.arrImg[this.ind].status = true;
+      this.arrayPathsImages[this.index].status = true;
 
-      if (this.ind > 2 && this.ind < this.arrImg.length - 2) {
-        this.shift = `left: -${this.shiftNumber * this.ind + -240}px;`;
-      } 
-      
-      else if (this.ind > 2 && this.ind < this.arrImg.length - 1) {
-        this.shift = `left: -${this.shiftNumber * this.ind + -360}px;`;
-      } 
-      
-      else if (this.ind == 2) {
-        this.shift = `left: -${this.shiftNumber * 0}px;`;
+      if (this.index > 2 && this.index < this.arrayPathsImages.length - 2) {
+        this.offsetLeft = `left: -${this.widthImages * this.index + -240}px;`;
+      } else if (
+        this.index > 2 &&
+        this.index < this.arrayPathsImages.length - 1
+      ) {
+        this.offsetLeft = `left: -${this.widthImages * this.index + -360}px;`;
+      } else if (this.index == 2) {
+        this.offsetLeft = `left: -${this.widthImages * 0}px;`;
+      } else if (this.index == 1) {
+        this.offsetLeft = `left: -${(this.widthImages = 0)}px;`;
+        this.widthImages = 120;
       }
-
-      else if (this.ind == 1) {
-        this.shift = `left: -${this.shiftNumber = 0}px;`;
-        this.shiftNumber = 120;
-      }
-
     }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang='scss'>
 * {
   outline: none;
 }
