@@ -193,7 +193,8 @@ img {
     transition: 1s;
     left: 0;
     .active {
-      border: 3px solid darkorange;
+      border-right: 3px solid #fff;
+      border-left: 3px solid #fff;
     }
     .carousel-img {
       box-sizing: border-box;
