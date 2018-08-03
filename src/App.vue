@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <menuadaptive></menuadaptive>
-    <!-- <gallery></gallery> --> 
+    <!-- <menuadaptive></menuadaptive> --> <!--Адаптивное меню-->
+    <!-- <gallery></gallery> --> <!--Слайдер галерея картинок и т.д.-->
+    <popup></popup> <!--Выпадающее окно-->
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import brands from '@fortawesome/fontawesome-free-brands'
 
 import gallery from './assets/components/gallery/Gallery.vue'
 import menuadaptive from './assets/components/menuadaptive/menuadaptive.vue'
+import popup from './assets/components/popup/popup.vue'
 export default {
   data () {
     return {
@@ -21,7 +23,8 @@ export default {
   },
   components: {
     gallery,
-    menuadaptive
+    menuadaptive,
+    popup
   }
 }
 </script>

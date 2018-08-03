@@ -65,6 +65,7 @@ export default {
         margin-left: auto;
         display: none;
         padding: 3px 10px;
+        
         @media screen and (max-width: 768px) {
           display: block;
         }
